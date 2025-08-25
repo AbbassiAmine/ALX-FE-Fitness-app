@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import WorkoutCard from '../components/WorkoutCard';
 import { fetchWorkouts } from '../api/wgerApi';
 
 function Home({ setCurrentPage, setCurrentWorkout }) {
