@@ -6,10 +6,8 @@ function Exercises({ setCurrentPage }) {
     const [exercises, setExercises] = useState([]);
     const [error, setError] = useState('');
     const [muscleFilter, setMuscleFilter] = useState('');
-    const [loading, setLoading] = useState(false);
 
     const handleSearch = async (query) => {
-        setLoading(true);
         try {
             const data = muscleFilter ? await fetchExercisesByMuscle(muscleFilter) : await fetchExercises(query);
             if (data.length === 0) {
@@ -20,8 +18,6 @@ function Exercises({ setCurrentPage }) {
             }
         } catch (err) {
             setError(err.message);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -34,7 +30,6 @@ function Exercises({ setCurrentPage }) {
             <h1 className="text-2xl font-bold text-white mb-4">Exercises</h1>
             <SearchBar onSearch={handleSearch} />
             {error && <p className="text-red-500 mb-4">{error}</p>}
-            {loading && <p className="text-white mb-4">Loading exercises...</p>}
             <div className="mb-4">
                 <select
                     onChange={(e) => setMuscleFilter(e.target.value)}
